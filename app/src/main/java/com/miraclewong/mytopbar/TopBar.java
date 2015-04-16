@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,6 +30,11 @@ public class TopBar extends RelativeLayout{
     private float titleTextSize;
     private int titleTextColor;
     private String title;
+
+    // 布局参数
+    private LayoutParams leftParams;
+    private LayoutParams rightParams;
+    private LayoutParams titleParams;
 
     public TopBar(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -69,5 +75,17 @@ public class TopBar extends RelativeLayout{
         tvTitle.setGravity(Gravity.CENTER);     //居中显示
 
         setBackgroundColor(0xFFF59563);         //设置背景颜色
+
+        leftParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
+        leftParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, TRUE);
+        addView(leftButton,leftParams);
+
+        rightParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        rightParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, TRUE);
+        addView(rightButton, rightParams);
+
+        titleParams = new LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
+        titleParams.addRule(RelativeLayout.CENTER_IN_PARENT, TRUE);
+        addView(tvTitle,titleParams);
     }
 }
